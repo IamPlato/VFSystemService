@@ -1,0 +1,22 @@
+Version: 1.8.5
+Date: 20201221
+Fix By: Ruoyi
+#1, add setWifiStaticIp in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+    /*
+     * set wifi static ip <br/>
+     * @param infos - add static ip infos in bundle, example:
+             Bundle infos = new Bundle();
+             infos.putString("STATIC_IP", "192.168.1.1");
+             infos.putString("STATIC_GATEWAY", "192.168.1.1");
+             infos.putString("STATIC_NETMASK", "255.255.255.0");
+             infos.putString("STATIC_DNS1", "192.168.1.1");
+             infos.putString("STATIC_DNS2", "192.168.1.1");
+     */
+    void setWifiStaticIp(in Bundle bundle);
+#2, add shutdownDevice in com/vfi/smartpos/system_service/aidl/ISystemManager.aidl
+
+    /**
+    * device shutdown
+    */
+    void shutdownDevice();

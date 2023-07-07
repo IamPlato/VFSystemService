@@ -1,0 +1,5 @@
+Version: 1.3.2.2
+Date: 20190829
+Fixed By Derrick
+1# Added some terminal network control APIs (NetworkManager)
+

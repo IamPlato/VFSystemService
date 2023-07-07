@@ -1,0 +1,11 @@
+Version: 1.8.3
+Date: 20201217
+Fix By: Ruoyi
+#1, add enableAlertWindow in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+    * enable the permission by packageName
+    * <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    * @param packageName, the packageName of application
+    **/
+    void enableAlertWindow(String packageName);

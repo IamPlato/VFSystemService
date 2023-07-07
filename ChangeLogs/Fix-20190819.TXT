@@ -1,0 +1,5 @@
+Version: 1.3.1.1
+Date: 2090819
+Fix List:
+1#, install APK fails in some case (Installing package appears exception) in Android 7
+

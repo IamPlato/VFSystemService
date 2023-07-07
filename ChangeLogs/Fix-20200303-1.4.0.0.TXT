@@ -1,0 +1,4 @@
+Version: 1.4.0.0
+Date: 20200303
+Fix By: YunFei Xu
+1#, Add initLogcat(), getLogcat(), restartApplication(), killApplication() interfaces.

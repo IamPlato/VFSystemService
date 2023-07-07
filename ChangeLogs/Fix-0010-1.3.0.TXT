@@ -1,0 +1,16 @@
+Version: 1.3.0
+Date: 20900618
+Fixed by Derrick
+1#, Add some api to configure the network
+	1-1#, APN 
+		defined in com.vfi.smartpos.system_service.aidl.networks.INetworkManager
+		int setAPN(in Bundle infos);
+		please find the comment above the API for more detail
+	1-2#, WiFi
+		defined in com.vfi.smartpos.system_service.aidl.networks.INetworkManager
+		void enableWifi(boolean state);
+	1-3#, get & set net work type (interface)
+		defined in com.vfi.smartpos.system_service.aidl.networks.INetworkManager
+		void setNetworkType(int mode);
+		int getNetworkType();
+		please find the comment above the API for more detail

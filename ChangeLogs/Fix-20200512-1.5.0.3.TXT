@@ -1,0 +1,6 @@
+Version: 1.5.0.3
+Date: 20200512
+Fix By: YunFei Xu
+1#, fix getLogcat() method bug. Add waiting time when recording log.
+when record finished or record time over 2 minutes, return log file path.
+if log file is not exist, return null.

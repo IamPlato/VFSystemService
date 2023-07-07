@@ -1,0 +1,5 @@
+Version: 1.2.0
+Date: 2090606
+Fixed by Li Kai
+1#, solve the OOM while upgrade OTA
+2#, support upgrade the security driver

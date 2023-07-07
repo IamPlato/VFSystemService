@@ -1,0 +1,9 @@
+Version: 1.6.0.1
+Date: 20200707
+Fix By: YunFei Xu
+1# add LAUNCHER type in SettingsType class. Detail information please refer to the SettingsType class.
+add LauncherActions inner class in SettingsActions class.
+add SET_LAUNCHER type in LauncherActions class.
+Detail using please refer to the ISettingsManager.aidl file.
+
+2# Adapt installApp() method of ISystemManager.aidl file to android9.0 and higher.

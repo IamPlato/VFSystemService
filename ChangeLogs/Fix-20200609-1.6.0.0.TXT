@@ -1,0 +1,9 @@
+Version: 1.6.0.0
+Date: 20200609
+Fix By: YunFei Xu
+1#, Add getSettingsManager() function in ISystemManager.aidl file.
+The goal of the above function is getting SettingManager instance;
+
+2# Add settingsSetActions() and settingsReadActions() functions in ISettingManager.aidl file.
+The goal of the above functions are to execute setting and reading settings actions.
+The Detail information please refer to the ISettingManager.aidl file.

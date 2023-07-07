@@ -1,0 +1,332 @@
+Created on 2021/09/30  GIT_COMMIT[15109a55]  
+**** **** **** **** **** **** **** **** **** **** **** **** 
+     Verifone System Service for X9-Series terminal
+**** **** **** **** **** **** **** **** **** **** **** **** 
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.9
+Date: 20210317
+Fix By: Ruoyi
+#1, Fix setMobilePreferredNetworkType and getMobilePreferredNetworkType can't support android 5
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.8
+Date: 20210301
+Fix By: Ruoyi
+#1, add clearCachesByPackageName in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+     * clear application caches by packageName
+     * @param packageName, the packageName of application
+     * @since 1.8.8
+     **/
+     void clearCachesByPackageName(String packageName);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.7
+Date: 20210125
+Fix By: Ruoyi
+#1, fix installApp, the native launcher can be operated while install itself
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.6
+Date: 20210106
+Fix By: Ruoyi
+#1, change setWifiStaticIp and setEthernetStaticIp in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+    /*
+     * set ethernet static ip <br/>
+     * set STATIC_IP 0.0.0.0 or 0 to change connection type to DHCP
+     * @param infos - add static ip infos in bundle, example:
+             Bundle infos = new Bundle();
+             infos.putString("STATIC_IP", "192.168.1.1");
+             infos.putString("STATIC_GATEWAY", "192.168.1.1");
+             infos.putString("STATIC_NETMASK", "255.255.255.0");
+             infos.putString("STATIC_DNS1", "192.168.1.1");
+             infos.putString("STATIC_DNS2", "192.168.1.1");
+     */
+    void setEthernetStaticIp(in Bundle bundle);
+
+    /*
+     * set wifi static ip <br/>
+     * set STATIC_IP 0.0.0.0 or 0 to change connection type to DHCP
+     * @param infos - add static ip infos in bundle, example:
+             Bundle infos = new Bundle();
+             infos.putString("STATIC_IP", "192.168.1.1");
+             infos.putString("STATIC_GATEWAY", "192.168.1.1");
+             infos.putString("STATIC_NETMASK", "255.255.255.0");
+             infos.putString("STATIC_DNS1", "192.168.1.1");
+             infos.putString("STATIC_DNS2", "192.168.1.1");
+     */
+    void setWifiStaticIp(in Bundle bundle);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.5
+Date: 20201221
+Fix By: Ruoyi
+#1, add setWifiStaticIp in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+    /*
+     * set wifi static ip <br/>
+     * @param infos - add static ip infos in bundle, example:
+             Bundle infos = new Bundle();
+             infos.putString("STATIC_IP", "192.168.1.1");
+             infos.putString("STATIC_GATEWAY", "192.168.1.1");
+             infos.putString("STATIC_NETMASK", "255.255.255.0");
+             infos.putString("STATIC_DNS1", "192.168.1.1");
+             infos.putString("STATIC_DNS2", "192.168.1.1");
+     */
+    void setWifiStaticIp(in Bundle bundle);
+#2, add shutdownDevice in com/vfi/smartpos/system_service/aidl/ISystemManager.aidl
+
+    /**
+    * device shutdown
+    */
+    void shutdownDevice();
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.4
+Date: 20201218
+Fix By: Ruoyi
+#1, add setMobilePreferredNetworkType and getMobilePreferredNetworkType in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+   /*
+    * set mobile preferred network type, only the current SIM card
+    * @param type 2G:only use 2G
+                  3G:use 2G/3G
+                  4G:use 2G/3G/4G
+    */
+   void setMobilePreferredNetworkType(String type);
+
+   /*
+    * get mobile preferred network type, only the current SIM card
+    * @return 2G 3G 4G for success, null for failure
+    */
+   String getMobilePreferredNetworkType();
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.3
+Date: 20201217
+Fix By: Ruoyi
+#1, add enableAlertWindow in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+    * enable the permission by packageName
+    * <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    * @param packageName, the packageName of application
+    **/
+    void enableAlertWindow(String packageName);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.2
+Date: 20201209
+Fix By: Ruoyi
+#1, add setDeviceBrightnessLevel and isShowBatteryPercent in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+    * set device brightness level
+    * @param level 0~255
+    * @return true for success, false for failure
+    **/
+    boolean setDeviceBrightnessLevel(int level);
+
+    /**
+    * set is show battery percent in status bar
+    * @param isShow, true for show, false for hide
+    * @return true for success, false for failure
+    **/
+    boolean isShowBatteryPercent(boolean isShow);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.1
+Date: 20201104
+Fix By: Ruoyi
+#1, add setScreenLock in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+     * set Screen Lock
+     * @param isLock true lock screen, false not lock
+     **/
+    void setScreenLock(boolean isLock);
+
+#2, support multi network
+    add setEthernetStaticIp in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+     /*
+      * set ethernet static ip <br/>
+      * @param infos - add static ip infos in bundle, example:
+              Bundle infos = new Bundle();
+              infos.putString("STATIC_IP", "192.168.1.1");
+              infos.putString("STATIC_GATEWAY", "192.168.1.1");
+              infos.putString("STATIC_NETMASK", "255.255.255.0");
+              infos.putString("STATIC_DNS1", "192.168.1.1");
+              infos.putString("STATIC_DNS2", "192.168.1.1");
+      **/
+     void setEthernetStaticIp(in Bundle bundle);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.8.0
+Date: 20201026
+Fix By: Ruoyi
+#1, add take capture in com/vfi/smartpos/system_service/aidl/ISystemManager.aidl
+    /**
+    * take capture of the screen
+    */
+    Bitmap takeCapture();
+
+#2, support multi network
+    add new API in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+     /**
+     * isMultiNetwork
+     * @return true for use multiNetwork, false for not use
+     */
+     boolean isMultiNetwork();
+
+     /**
+     * setMultiNetwork
+     * @param enable true for enable, false for disable
+     */
+     void setMultiNetwork(boolean enable);
+
+     /**
+     * getMultiNetworkPrefer
+     * @return the MultiNetworkPrefer
+     */
+     String getMultiNetworkPrefer();
+
+     /**
+     * setMultiNetworkPrefer
+     * @param prefer
+              public static final String TRANSPORT_WIFI_ETHERNET_CELLULAR = "wifi,ethernet,cellular";
+              public static final String TRANSPORT_WIFI_CELLULAR_ETHERNET = "wifi,cellular,ethernet";
+              public static final String TRANSPORT_CELLULAR_WIFI_ETHERNET = "cellular,wifi,ethernet";
+              public static final String TRANSPORT_CELLULAR_ETHERNET_WIFI = "cellular,ethernet,wifi";
+              public static final String TRANSPORT_ETHERNET_CELLULAR_WIFI = "ethernet,cellular,wifi";
+              public static final String TRANSPORT_ETHERNET_WIFI_CELLULAR = "ethernet,wifi,cellular";
+     * @return true for success, false for failure
+     */
+     boolean setMultiNetworkPrefer(String prefer);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.7.0.1
+Date: 20200807
+Fix By: Simon
+#1, add new API selectMobileDataOnSlot in 
+com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+    /**
+    * slotIdx 1 or 2 to select it use for mobile data
+    * */
+    int selectMobileDataOnSlot( int slotIdx);
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.6.0.4
+Date: 20200806
+Fix By: Simon
+#1, add more option of set APN, int setAPN(in Bundle infos);
+com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+            // "SLOT"   // Add by Simon on version 1.6.0.3
+            // SLOT: 1 or 2 for SIM card in slot 1 or 2.
+            // using the active slot as default if there is no SLOT setting & no "fixed_numeric" setting
+            infos.putString("SLOT", "1");
+
+            // "fixed_numeric"  // add by Simon on version 1.6.0.3
+            // fixed the numeric to fixed_numeric for specific SIM card
+            // using the "SLOT" if there is no "fixed_numeric" setting
+            infos.putString("fixed_numeric", "46002");
+#2， Fixed the issue that enableMobileData doesn't work---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.6.0.1
+Date: 20200707
+Fix By: YunFei Xu
+1# add LAUNCHER type in SettingsType class. Detail information please refer to the SettingsType class.
+add LauncherActions inner class in SettingsActions class.
+add SET_LAUNCHER type in LauncherActions class.
+Detail using please refer to the ISettingsManager.aidl file.
+
+2# Adapt installApp() method of ISystemManager.aidl file to android9.0 and higher.---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.6.0.0
+Date: 20200609
+Fix By: YunFei Xu
+1#, Add getSettingsManager() function in ISystemManager.aidl file.
+The goal of the above function is getting SettingManager instance;
+
+2# Add settingsSetActions() and settingsReadActions() functions in ISettingManager.aidl file.
+The goal of the above functions are to execute setting and reading settings actions.
+The Detail information please refer to the ISettingManager.aidl file.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.5.0.3
+Date: 20200512
+Fix By: YunFei Xu
+1#, fix getLogcat() method bug. Add waiting time when recording log.
+when record finished or record time over 2 minutes, return log file path.
+if log file is not exist, return null.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.5.0.0
+Date: 20200324
+Fix By: YunFei Xu
+1#, Add getLaunchAppsInfo(long beginTime, long endTime) method.
+getLaunchAppsInfo(long beginTime, long endTime) method refers to ISystemManager.aidl file.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.4.0.0
+Date: 20200303
+Fix By: YunFei Xu
+1#, Add initLogcat(), getLogcat(), restartApplication(), killApplication() interfaces.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.4.1
+Date: 20200115
+Fix List:
+1#, Add isAdbMode() interface.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.4
+Date: 20190917
+Fix List:
+1#, Fixed bug that sometime install failed.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.3
+Date: 2090829
+Fix List:
+1#, 1.3.3 release version
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.2.3
+Date: 2090829
+Fix List:
+1#, fixed issue that install apk faliled
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.2.2
+Date: 20190829
+Fixed By Derrick
+1# Added some terminal network control APIs (NetworkManager)
+
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.2
+Date: 20190822
+Fixed By Simon
+1#, Release
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.1.1
+Date: 2090819
+Fix List:
+1#, install APK fails in some case (Installing package appears exception) in Android 7
+
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.1
+Date: 2090819
+Fix List:
+1#, Update the status to caller if System Service upgrade itself.
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.3.0
+Date: 20900618
+Fixed by Derrick
+1#, Add some api to configure the network
+	1-1#, APN 
+		defined in com.vfi.smartpos.system_service.aidl.networks.INetworkManager
+		int setAPN(in Bundle infos);
+		please find the comment above the API for more detail
+	1-2#, WiFi
+		defined in com.vfi.smartpos.system_service.aidl.networks.INetworkManager
+		void enableWifi(boolean state);
+	1-3#, get & set net work type (interface)
+		defined in com.vfi.smartpos.system_service.aidl.networks.INetworkManager
+		void setNetworkType(int mode);
+		int getNetworkType();
+		please find the comment above the API for more detail
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.2.0
+Date: 2090606
+Fixed by Li Kai
+1#, solve the OOM while upgrade OTA
+2#, support upgrade the security driver
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  
+Version: 1.1.1
+Date: 
+Fixed By Li Kai
+1#, release for upgrade / install APK
+
+---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ---- ----  

@@ -1,0 +1,41 @@
+Version: 1.8.0
+Date: 20201026
+Fix By: Ruoyi
+#1, add take capture in com/vfi/smartpos/system_service/aidl/ISystemManager.aidl
+    /**
+    * take capture of the screen
+    */
+    Bitmap takeCapture();
+
+#2, support multi network
+    add new API in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+     /**
+     * isMultiNetwork
+     * @return true for use multiNetwork, false for not use
+     */
+     boolean isMultiNetwork();
+
+     /**
+     * setMultiNetwork
+     * @param enable true for enable, false for disable
+     */
+     void setMultiNetwork(boolean enable);
+
+     /**
+     * getMultiNetworkPrefer
+     * @return the MultiNetworkPrefer
+     */
+     String getMultiNetworkPrefer();
+
+     /**
+     * setMultiNetworkPrefer
+     * @param prefer
+              public static final String TRANSPORT_WIFI_ETHERNET_CELLULAR = "wifi,ethernet,cellular";
+              public static final String TRANSPORT_WIFI_CELLULAR_ETHERNET = "wifi,cellular,ethernet";
+              public static final String TRANSPORT_CELLULAR_WIFI_ETHERNET = "cellular,wifi,ethernet";
+              public static final String TRANSPORT_CELLULAR_ETHERNET_WIFI = "cellular,ethernet,wifi";
+              public static final String TRANSPORT_ETHERNET_CELLULAR_WIFI = "ethernet,cellular,wifi";
+              public static final String TRANSPORT_ETHERNET_WIFI_CELLULAR = "ethernet,wifi,cellular";
+     * @return true for success, false for failure
+     */
+     boolean setMultiNetworkPrefer(String prefer);

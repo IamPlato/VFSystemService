@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+
+static def releaseTime() {
+    return new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+8"))
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.12.0"
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
+        }
+    }
+
+    android.libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            def fileName
+            if (outputFile != null && outputFile.name.endsWith('.aar')) {
+                //这里修改apk文件名
+                if (variant.buildType.name == 'release') {
+                    fileName = "X990SystemService_${defaultConfig.versionName}_${releaseTime()}_release.aar"
+                    outputFileName = fileName
+                } else if (variant.buildType.name == 'debug') {
+                    fileName = "X990SystemService_${defaultConfig.versionName}_${releaseTime()}_debug.aar"
+                    outputFileName = fileName
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: "libs", include: ["*.jar"])
+    testCompile 'junit:junit:4.12'
+
+}

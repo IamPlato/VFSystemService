@@ -1,0 +1,4 @@
+Version: 1.8.9
+Date: 20210317
+Fix By: Ruoyi
+#1, Fix setMobilePreferredNetworkType and getMobilePreferredNetworkType can't support android 5

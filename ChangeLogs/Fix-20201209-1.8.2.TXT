@@ -1,0 +1,18 @@
+Version: 1.8.2
+Date: 20201209
+Fix By: Ruoyi
+#1, add setDeviceBrightnessLevel and isShowBatteryPercent in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+    * set device brightness level
+    * @param level 0~255
+    * @return true for success, false for failure
+    **/
+    boolean setDeviceBrightnessLevel(int level);
+
+    /**
+    * set is show battery percent in status bar
+    * @param isShow, true for show, false for hide
+    * @return true for success, false for failure
+    **/
+    boolean isShowBatteryPercent(boolean isShow);

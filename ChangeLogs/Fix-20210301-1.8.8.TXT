@@ -1,0 +1,11 @@
+Version: 1.8.8
+Date: 20210301
+Fix By: Ruoyi
+#1, add clearCachesByPackageName in com/vfi/smartpos/system_service/aidl/settings/ISettingsManager.aidl
+
+    /**
+     * clear application caches by packageName
+     * @param packageName, the packageName of application
+     * @since 1.8.8
+     **/
+     void clearCachesByPackageName(String packageName);

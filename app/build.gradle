@@ -1,0 +1,166 @@
+apply plugin: 'com.android.application'
+
+static def releaseTime() {
+    return new Date().format("yyMMdd", TimeZone.getTimeZone("GMT+8"))
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 27
+        versionName "1.12.3"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-fexceptions"
+                abiFilters "armeabi-v7a"
+            }
+        }
+        buildConfigField "String", "BUILD_TIMESTAMP", "\"" + new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+8")) + "\""
+        ndk {
+            // Specifies the ABI configurations of your native
+            // libraries Gradle should build and package with your APK.
+            abiFilters 'armeabi-v7a'
+        }
+
+        flavorDimensions "version"
+    }
+
+//    productFlavors.all {
+//        ext.fileNamePrefix = ""
+//        ext.appIdPrefix = "com.example"
+//        ext.appId = ""
+//        ext.appIdSuffix = ""
+//    }
+    productFlavors {
+        VersionGernal_ {
+            dimension "version"
+            versionCode 1000500
+            applicationId "com.vfi.smartpos.system_service"
+            manifestPlaceholders = [appName: "VFSystemService"]
+            ext.fileNamePrefix = "VF"
+        }
+        VersionBCA_ {
+            dimension "version"
+            versionCode 112020000
+            applicationId "com.asia.sservice.velvet"
+            manifestPlaceholders = [appName: "Asia Service 2"]
+            ext.fileNamePrefix = "BCA"
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('../platform.keystore')
+            keyAlias 'platform'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+        debug {
+            storeFile file('../platform.keystore')
+            keyAlias 'platform'
+            keyPassword 'android'
+            storePassword 'android'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField "boolean", "LOG_DEBUG", "false"
+//            zipAlignEnabled true
+//            shrinkResources true
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            def fileName
+            def flavors = variant.productFlavors
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                if (variant.buildType.name == 'release') {
+                    fileName = flavors[0].fileNamePrefix + "X990SystemService_${defaultConfig.versionName}_${versionCode}_${releaseTime()}_release.apk"
+                } else if (variant.buildType.name == 'debug') {
+                    fileName = flavors[0].fileNamePrefix + "X990SystemService_${defaultConfig.versionName}_${versionCode}_${releaseTime()}_debug.apk"
+                }
+                outputFileName = fileName
+            }
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.tencent:mmkv:1.2.12'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    testImplementation 'junit:junit:4.12'
+//    compile files('libs/zip4j_1.3.2.jar')
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'org.dom4j:dom4j:2.0.3'
+    implementation 'androidx.annotation:annotation:1.1.0'
+}
+task createRevision(type: Exec) {
+    workingDir '../ChangeLogs'
+
+    //on windows:
+    commandLine 'cmd', '/c', 'create_revision.bat'
+
+    //store the output instead of printing to the console:
+    standardOutput = new ByteArrayOutputStream()
+
+    //extension method stopTomcat.output() can be used to obtain the output:
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
+task createDoc(type: Exec) {
+    workingDir './'
+
+    //on windows:
+    commandLine 'cmd', '/c', 'create_doc.bat'
+
+    //store the output instead of printing to the console:
+    standardOutput = new ByteArrayOutputStream()
+
+    //extension method stopTomcat.output() can be used to obtain the output:
+    ext.output = {
+        return standardOutput.toString()
+    }
+}
+
+project.tasks.whenTaskAdded { Task theTask ->
+    if (theTask.name.equals("assembleVersionGernal_Release")) {
+        println 'add task'
+//        theTask.dependsOn(createRevision)
+        theTask.dependsOn(createDoc)
+    }
+
+}
+

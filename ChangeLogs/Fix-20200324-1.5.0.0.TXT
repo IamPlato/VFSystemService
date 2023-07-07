@@ -1,0 +1,5 @@
+Version: 1.5.0.0
+Date: 20200324
+Fix By: YunFei Xu
+1#, Add getLaunchAppsInfo(long beginTime, long endTime) method.
+getLaunchAppsInfo(long beginTime, long endTime) method refers to ISystemManager.aidl file.

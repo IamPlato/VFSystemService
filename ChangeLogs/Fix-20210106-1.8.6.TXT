@@ -1,0 +1,30 @@
+Version: 1.8.6
+Date: 20210106
+Fix By: Ruoyi
+#1, change setWifiStaticIp and setEthernetStaticIp in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+    /*
+     * set ethernet static ip <br/>
+     * set STATIC_IP 0.0.0.0 or 0 to change connection type to DHCP
+     * @param infos - add static ip infos in bundle, example:
+             Bundle infos = new Bundle();
+             infos.putString("STATIC_IP", "192.168.1.1");
+             infos.putString("STATIC_GATEWAY", "192.168.1.1");
+             infos.putString("STATIC_NETMASK", "255.255.255.0");
+             infos.putString("STATIC_DNS1", "192.168.1.1");
+             infos.putString("STATIC_DNS2", "192.168.1.1");
+     */
+    void setEthernetStaticIp(in Bundle bundle);
+
+    /*
+     * set wifi static ip <br/>
+     * set STATIC_IP 0.0.0.0 or 0 to change connection type to DHCP
+     * @param infos - add static ip infos in bundle, example:
+             Bundle infos = new Bundle();
+             infos.putString("STATIC_IP", "192.168.1.1");
+             infos.putString("STATIC_GATEWAY", "192.168.1.1");
+             infos.putString("STATIC_NETMASK", "255.255.255.0");
+             infos.putString("STATIC_DNS1", "192.168.1.1");
+             infos.putString("STATIC_DNS2", "192.168.1.1");
+     */
+    void setWifiStaticIp(in Bundle bundle);

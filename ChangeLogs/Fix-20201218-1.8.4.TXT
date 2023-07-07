@@ -1,0 +1,18 @@
+Version: 1.8.4
+Date: 20201218
+Fix By: Ruoyi
+#1, add setMobilePreferredNetworkType and getMobilePreferredNetworkType in com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+
+   /*
+    * set mobile preferred network type, only the current SIM card
+    * @param type 2G:only use 2G
+                  3G:use 2G/3G
+                  4G:use 2G/3G/4G
+    */
+   void setMobilePreferredNetworkType(String type);
+
+   /*
+    * get mobile preferred network type, only the current SIM card
+    * @return 2G 3G 4G for success, null for failure
+    */
+   String getMobilePreferredNetworkType();

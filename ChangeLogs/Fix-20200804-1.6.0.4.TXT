@@ -1,0 +1,15 @@
+Version: 1.6.0.4
+Date: 20200806
+Fix By: Simon
+#1, add more option of set APN, int setAPN(in Bundle infos);
+com/vfi/smartpos/system_service/aidl/networks/INetworkManager.aidl
+            // "SLOT"   // Add by Simon on version 1.6.0.3
+            // SLOT: 1 or 2 for SIM card in slot 1 or 2.
+            // using the active slot as default if there is no SLOT setting & no "fixed_numeric" setting
+            infos.putString("SLOT", "1");
+
+            // "fixed_numeric"  // add by Simon on version 1.6.0.3
+            // fixed the numeric to fixed_numeric for specific SIM card
+            // using the "SLOT" if there is no "fixed_numeric" setting
+            infos.putString("fixed_numeric", "46002");
+#2， Fixed the issue that enableMobileData doesn't work

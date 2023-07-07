@@ -1,0 +1,4 @@
+Version: 1.8.7
+Date: 20210125
+Fix By: Ruoyi
+#1, fix installApp, the native launcher can be operated while install itself

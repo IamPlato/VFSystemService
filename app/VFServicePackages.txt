@@ -1,0 +1,3 @@
+com.vfi.smartpos.system_service.aidl
+com.vfi.smartpos.system_service.aidl.networks
+com.vfi.smartpos.system_service.aidl.settings
